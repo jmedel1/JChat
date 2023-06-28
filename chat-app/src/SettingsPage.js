@@ -1,35 +1,33 @@
 import React, { useState } from 'react';
 
 function SettingsPage() {
-  const [displayName, setDisplayName] = useState('');
+  const [newMessage, setNewMessage] = useState('');
 
-  const handleDisplayNameChange = (e) => {
-    setDisplayName(e.target.value);
-  };
-
-  const handleSaveSettings = (e) => {
-    e.preventDefault();
-
-    // Save the display name to the backend or perform any necessary actions
-    // You can replace this with your own logic
-
-    // Display a success message or perform any additional actions as needed
-    alert('Settings saved!');
-  };
+  async function handleSubmit(event) {
+    event.preventDefault();
+    if (newMessage) {
+      await fetch('http://localhost:3001/messages', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ text: newMessage, sender: 'User' }),
+      });
+      setNewMessage('');
+    }
+  }
 
   return (
-    <div>
-      <h1>Settings Page</h1>
-      <form onSubmit={handleSaveSettings}>
-        <label>
-          Display Name:
-          <input
-            type="text"
-            value={displayName}
-            onChange={handleDisplayNameChange}
-          />
-        </label>
-        <button type="submit">Save</button>
+    <div className="SettingsPage">
+      <h1>Settings</h1>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          placeholder="Enter a message"
+          value={newMessage}
+          onChange={event => setNewMessage(event.target.value)}
+        />
+        <button type="submit">Send</button>
       </form>
     </div>
   );
