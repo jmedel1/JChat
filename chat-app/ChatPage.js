@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 function ChatPage() {
   const [messages, setMessages] = useState([]);
+  const [newMessage, setNewMessage] = useState('');
 
   useEffect(() => {
     // Simulating fetching messages from a server or database
@@ -23,6 +24,27 @@ function ChatPage() {
     fetchMessages();
   }, []);
 
+  const handleNewMessageChange = (e) => {
+    setNewMessage(e.target.value);
+  };
+
+  const handleSendMessage = (e) => {
+    e.preventDefault();
+
+    // Create a new message object
+    const newMessageObj = {
+      id: messages.length + 1,
+      text: newMessage,
+      user: 'User1', // Replace with the current user or dynamic user
+    };
+
+    // Update the messages state with the new message
+    setMessages([...messages, newMessageObj]);
+
+    // Clear the newMessage state for the next message
+    setNewMessage('');
+  };
+
   return (
     <div>
       <h1>Chat Page</h1>
@@ -34,6 +56,15 @@ function ChatPage() {
           </li>
         ))}
       </ul>
+      <form onSubmit={handleSendMessage}>
+        <input
+          type="text"
+          value={newMessage}
+          onChange={handleNewMessageChange}
+          placeholder="Type your message"
+        />
+        <button type="submit">Send</button>
+      </form>
     </div>
   );
 }
