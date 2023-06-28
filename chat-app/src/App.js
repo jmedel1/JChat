@@ -4,29 +4,29 @@ import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import ChatPage from './ChatPage';
 import SettingsPage from './SettingsPage';
 
-
-
 function App() {
   return (
     <Router>
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <div className="App">
+        <nav>
+          <ul>
+            <li>
+              <Link to="/">Chat</Link>
+            </li>
+            <li>
+              <Link to="/settings">Settings</Link>
+            </li>
+          </ul>
+        </nav>
+
+        <Switch>
+          <Route exact path="/" component={ChatPage} />
+          <Route path="/settings" component={SettingsPage} />
+        </Switch>
+      </div>
     </Router>
   );
 }
 
 export default App;
+
