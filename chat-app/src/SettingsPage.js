@@ -1,33 +1,49 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
 function SettingsPage() {
-  const [newMessage, setNewMessage] = useState('');
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
 
-  async function handleSubmit(event) {
-    event.preventDefault();
-    if (newMessage) {
-      await fetch('http://localhost:3001/messages', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ text: newMessage, sender: 'User' }),
-      });
-      setNewMessage('');
+  const handleNameChange = (e) => {
+    setName(e.target.value);
+  };
+
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const updatedProfile = {
+      name,
+      email,
+    };
+
+    try {
+      const response = await axios.post('http://localhost:3001/profile', updatedProfile);
+      console.log('Profile updated:', response.data);
+    } catch (error) {
+      console.error('Error updating profile:', error);
     }
-  }
+  };
 
   return (
-    <div className="SettingsPage">
-      <h1>Settings</h1>
+    <div>
+      <h1>Settings Page</h1>
       <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Enter a message"
-          value={newMessage}
-          onChange={event => setNewMessage(event.target.value)}
-        />
-        <button type="submit">Send</button>
+        <label>
+          Name:
+          <input type="text" value={name} onChange={handleNameChange} />
+        </label>
+        <br />
+        <label>
+          Email:
+          <input type="email" value={email} onChange={handleEmailChange} />
+        </label>
+        <br />
+        <button type="submit">Save</button>
       </form>
     </div>
   );
