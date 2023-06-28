@@ -10,7 +10,7 @@ function App() {
         <nav>
           <ul>
             <li>
-              <Link to="/chat">Chat</Link>
+              <Link to="/">Chat</Link>
             </li>
             <li>
               <Link to="/settings">Settings</Link>
@@ -19,12 +19,8 @@ function App() {
         </nav>
 
         <Switch>
-          <Route path="/chat">
-            <ChatPage />
-          </Route>
-          <Route path="/settings">
-            <SettingsPage />
-          </Route>
+          <Route exact path="/" component={ChatPage} />
+          <Route path="/settings" component={SettingsPage} />
         </Switch>
       </div>
     </Router>

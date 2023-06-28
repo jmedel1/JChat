@@ -1,65 +1,35 @@
 import React, { useState } from 'react';
 
 function SettingsPage() {
-  const [username, setUsername] = useState('');
-  const [avatar, setAvatar] = useState('');
-  const [notificationsEnabled, setNotificationsEnabled] = useState(false);
+  const [displayName, setDisplayName] = useState('');
 
-  const handleUsernameChange = (event) => {
-    setUsername(event.target.value);
+  const handleDisplayNameChange = (e) => {
+    setDisplayName(e.target.value);
   };
 
-  const handleAvatarChange = (event) => {
-    setAvatar(event.target.value);
-  };
+  const handleSaveSettings = (e) => {
+    e.preventDefault();
 
-  const handleNotificationsToggle = () => {
-    setNotificationsEnabled(!notificationsEnabled);
-  };
+    // Save the display name to the backend or perform any necessary actions
+    // You can replace this with your own logic
 
-  const handleFormSubmit = (event) => {
-    event.preventDefault();
-    // Logic to save user settings to the server or database
-    // You can use the updated 'username', 'avatar', and 'notificationsEnabled' values
-    console.log('Updated settings:', {
-      username,
-      avatar,
-      notificationsEnabled
-    });
+    // Display a success message or perform any additional actions as needed
+    alert('Settings saved!');
   };
 
   return (
     <div>
       <h1>Settings Page</h1>
-      <form onSubmit={handleFormSubmit}>
-        <div>
-          <label htmlFor="username">Username:</label>
+      <form onSubmit={handleSaveSettings}>
+        <label>
+          Display Name:
           <input
             type="text"
-            id="username"
-            value={username}
-            onChange={handleUsernameChange}
+            value={displayName}
+            onChange={handleDisplayNameChange}
           />
-        </div>
-        <div>
-          <label htmlFor="avatar">Avatar URL:</label>
-          <input
-            type="text"
-            id="avatar"
-            value={avatar}
-            onChange={handleAvatarChange}
-          />
-        </div>
-        <div>
-          <label htmlFor="notifications">Enable Notifications:</label>
-          <input
-            type="checkbox"
-            id="notifications"
-            checked={notificationsEnabled}
-            onChange={handleNotificationsToggle}
-          />
-        </div>
-        <button type="submit">Save Settings</button>
+        </label>
+        <button type="submit">Save</button>
       </form>
     </div>
   );
