@@ -19,8 +19,12 @@ function App() {
         </nav>
 
         <Switch>
-          <Route exact path="/" component={ChatPage} />
-          <Route path="/settings" component={SettingsPage} />
+          <Route exact path="/">
+            <ChatPage />
+          </Route>
+          <Route path="/settings">
+            <SettingsPage />
+          </Route>
         </Switch>
       </div>
     </Router>

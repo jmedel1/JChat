@@ -1,0 +1,7 @@
+{
+    "messages": [
+      { "id": 1, "text": "Hello", "sender": "User" },
+      { "id": 2, "text": "Hi there!", "sender": "Bot" }
+    ]
+  }
+  
