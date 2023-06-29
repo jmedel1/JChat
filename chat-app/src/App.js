@@ -1,35 +1,35 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
-import ChatPage from './ChatPage';
-import SettingsPage from './SettingsPage';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import Home from './components/Home';
+import ChatRoom from './components/ChatRoom';
+import ChatForm from './components/ChatForm';
 
-function App() {
+const App = () => {
   return (
     <Router>
-      <div className="App">
+      <div>
         <nav>
           <ul>
             <li>
-              <Link to="/">Chat</Link>
+              <Link to="/">Home</Link>
             </li>
             <li>
-              <Link to="/settings">Settings</Link>
+              <Link to="/chat">Chat Room</Link>
+            </li>
+            <li>
+              <Link to="/chat-form">Chat Form</Link>
             </li>
           </ul>
         </nav>
 
-        <Switch>
-          <Route exact path="/">
-            <ChatPage />
-          </Route>
-          <Route path="/settings">
-            <SettingsPage />
-          </Route>
-        </Switch>
+        <hr />
+
+        <Route exact path="/" component={Home} />
+        <Route path="/chat" component={ChatRoom} />
+        <Route path="/chat-form" component={ChatForm} />
       </div>
     </Router>
   );
-}
+};
 
 export default App;
-
