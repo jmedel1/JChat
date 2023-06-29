@@ -1,35 +1,24 @@
-import React from 'react';
-import { Switch } from 'react-router-dom';
-import ChatPage from './ChatPage';
-import SettingsPage from './SettingsPage';
-import axios from 'axios';
-
+import logo from './logo.svg';
+import './App.css';
 
 function App() {
   return (
-    <Router>
-      <div className="App">
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Chat</Link>
-            </li>
-            <li>
-              <Link to="/settings">Settings</Link>
-            </li>
-          </ul>
-        </nav>
-
-        <Switch>
-          <Route exact path="/">
-            <ChatPage />
-          </Route>
-          <Route path="/settings">
-            <SettingsPage />
-          </Route>
-        </Switch>
-      </div>
-    </Router>
+    <div className="App">
+      <header className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+        <p>
+          Edit <code>src/App.js</code> and save to reload.
+        </p>
+        <a
+          className="App-link"
+          href="https://reactjs.org"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Learn React
+        </a>
+      </header>
+    </div>
   );
 }
 
