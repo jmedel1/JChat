@@ -1,8 +1,8 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-import Home from './components/Home';
-import ChatRoom from './components/ChatRoom';
-import ChatForm from './components/ChatForm';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import Home from './Home';
+import ChatForm from './ChatForm';
+import ChatRoom from './ChatRoom';
 
 const App = () => {
   return (
@@ -24,9 +24,11 @@ const App = () => {
 
         <hr />
 
-        <Route exact path="/" component={Home} />
-        <Route path="/chat" component={ChatRoom} />
-        <Route path="/chat-form" component={ChatForm} />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/chat" element={<ChatRoom />} />
+          <Route path="/chat-form" element={<ChatForm />} />
+        </Routes>
       </div>
     </Router>
   );
