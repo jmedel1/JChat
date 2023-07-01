@@ -31,7 +31,7 @@ const ChatRoom = ({ messages }) => {
   };
 
   return (
-    <div>
+    <div style={{ backgroundColor: '#ffcc80', padding: '20px' }}>
       <h2 style={{ color: '#ff6f00', fontFamily: 'Mexican-Font' }}>Chat Room</h2>
       {messages.map((message) => {
         const messageComments = comments[message.id] || [];
