@@ -1,10 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Home from './Home';
 import ChatForm from './ChatForm';
 import ChatRoom from './ChatRoom';
 
 const App = () => {
+  const [messages, setMessages] = useState([]);
+
+  const handleNewMessage = (message) => {
+    setMessages([...messages, message]);
+  };
+
   return (
     <Router>
       <div>
@@ -26,8 +32,14 @@ const App = () => {
 
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/chat" element={<ChatRoom />} />
-          <Route path="/chat-form" element={<ChatForm />} />
+          <Route
+            path="/chat"
+            element={<ChatRoom messages={messages} />}
+          />
+          <Route
+            path="/chat-form"
+            element={<ChatForm onNewMessage={handleNewMessage} />}
+          />
         </Routes>
       </div>
     </Router>
