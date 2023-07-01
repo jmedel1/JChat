@@ -23,7 +23,7 @@ const ChatForm = ({ onNewMessage }) => {
 
   return (
     <div style={{ backgroundColor: '#F08080', padding: '20px', borderRadius: '8px' }}>
-      <h2 style={{ color: '#8B0000', fontFamily: 'MexicanFont', fontSize: '24px' }}>Chat Form</h2>
+      <h2 style={{ color: '#8B0000', fontFamily: 'Pacifico, cursive', fontSize: '24px' }}>Chat Form</h2>
       <form onSubmit={handleSubmit}>
         <input
           type="text"

@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 const Home = () => {
   const homepageStyle = {
-    backgroundColor: '#F44336', // Bright red
+    backgroundColor: '#2196F3', // Bright blue
     color: '#FFFFFF', // White
     padding: '20px',
     fontFamily: 'Montserrat, sans-serif', // Mexican-inspired font
@@ -14,16 +14,12 @@ const Home = () => {
     fontFamily: 'Pacifico, cursive', // Mexican-inspired font for heading
   };
 
-  const createPostStyle = {
-    marginBottom: '20px',
-  };
-
   const interactPostsStyle = {
     marginBottom: '20px',
   };
 
   const postStyle = {
-    backgroundColor: '#FFC107', // Bright yellow
+    backgroundColor: '#03A9F4', // Light blue
     color: '#212121', // Black
     padding: '10px',
     marginBottom: '10px',
@@ -40,6 +36,72 @@ const Home = () => {
     color: '#FFFFFF', // White
   };
 
+  const [topLikedPosts, setTopLikedPosts] = useState([]);
+  const [topCommentedPosts, setTopCommentedPosts] = useState([]);
+
+  useEffect(() => {
+    const fetchTopLikedPosts = async () => {
+      try {
+        const response = await fetch('/api/posts/top-liked');
+        const data = await response.json();
+        setTopLikedPosts(data);
+      } catch (error) {
+        console.error('Error fetching top liked posts:', error);
+      }
+    };
+
+    const fetchTopCommentedPosts = async () => {
+      try {
+        const response = await fetch('/api/posts/top-commented');
+        const data = await response.json();
+        setTopCommentedPosts(data);
+      } catch (error) {
+        console.error('Error fetching top commented posts:', error);
+      }
+    };
+
+    fetchTopLikedPosts();
+    fetchTopCommentedPosts();
+  }, []);
+
+  const handleLike = async (postId) => {
+    try {
+      const response = await fetch(`/api/posts/${postId}/like`, {
+        method: 'PUT',
+      });
+      const data = await response.json();
+      if (response.ok) {
+        // Update the state with the updated post
+        setTopLikedPosts((prevPosts) =>
+          prevPosts.map((post) => (post._id === data._id ? data : post))
+        );
+      } else {
+        console.error('Error liking the post:', data.error);
+      }
+    } catch (error) {
+      console.error('Error liking the post:', error);
+    }
+  };
+
+  const handleComment = async (postId) => {
+    try {
+      const response = await fetch(`/api/posts/${postId}/comment`, {
+        method: 'PUT',
+      });
+      const data = await response.json();
+      if (response.ok) {
+        // Update the state with the updated post
+        setTopCommentedPosts((prevPosts) =>
+          prevPosts.map((post) => (post._id === data._id ? data : post))
+        );
+      } else {
+        console.error('Error commenting on the post:', data.error);
+      }
+    } catch (error) {
+      console.error('Error commenting on the post:', error);
+    }
+  };
+
   return (
     <div style={homepageStyle} className="homepage">
       <header style={headingStyle}>
@@ -47,24 +109,33 @@ const Home = () => {
         <p>Create and Interact with Posts</p>
       </header>
       <main>
-        <section style={createPostStyle} className="create-post">
-          <h2>Create a Post</h2>
-          <form>
-            <textarea placeholder="Write your post here"></textarea>
-            <button type="submit">Post</button>
-          </form>
-        </section>
         <section style={interactPostsStyle} className="interact-posts">
           <h2>Interact with Posts</h2>
-          <div style={postStyle} className="post">
-            <p>This is a post made by someone else.</p>
-            <div style={postActionsStyle} className="post-actions">
-              <button>Like</button>
-              <button>Comment</button>
-              <button>Share</button>
-            </div>
+          <div>
+            <h3>Top Liked Posts</h3>
+            {topLikedPosts.map((post) => (
+              <div key={post._id} style={postStyle} className="post">
+                <p>{post.title}</p>
+                <div style={postActionsStyle} className="post-actions">
+                  <button onClick={() => handleLike(post._id)}>Like ({post.likes})</button>
+                  <button onClick={() => handleComment(post._id)}>Comment</button>
+                  <button>Share</button>
+                </div>
+              </div>
+            ))}
           </div>
-          {/* More posts can be added here */}
+          <div>
+            <h3>Top Commented Posts</h3>
+            {topCommentedPosts.map((post) => (
+              <div key={post._id} style={postStyle} className="post">
+                <p>{post.title}</p>
+                <div style={postActionsStyle} className="post-actions">
+                  <button onClick={() => handleLike(post._id)}>Like ({post.likes})</button>
+                  <button onClick={() => handleComment(post._id)}>Comment</button>
+                </div>
+              </div>
+            ))}
+          </div>
         </section>
       </main>
       <footer style={footerStyle}>
