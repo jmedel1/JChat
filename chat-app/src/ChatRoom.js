@@ -1,21 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
-const ChatRoom = () => {
-  const [messages, setMessages] = useState([]);
-
-  useEffect(() => {
-    // Fetch messages from json-server
-    fetch('http://localhost:3000/messages')
-      .then((response) => response.json())
-      .then((data) => {
-        // Update state with the retrieved messages
-        setMessages(data);
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-      });
-  }, []);
-
+const ChatRoom = ({ messages }) => {
   return (
     <div>
       <h2>Chat Room</h2>
