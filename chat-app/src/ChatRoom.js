@@ -6,10 +6,13 @@ const ChatRoom = ({ messages }) => {
   const [dislikes, setDislikes] = useState({});
 
   const handleComment = (messageId, comment) => {
-    setComments((prevComments) => ({
-      ...prevComments,
-      [messageId]: [...(prevComments[messageId] || []), comment]
-    }));
+    const newComment = comment.trim();
+    if (newComment) {
+      setComments((prevComments) => ({
+        ...prevComments,
+        [messageId]: [...(prevComments[messageId] || []), newComment]
+      }));
+    }
   };
 
   const handleLike = (messageId) => {
@@ -54,7 +57,7 @@ const ChatRoom = ({ messages }) => {
           >
             Comment
           </button>
-          {Array.isArray(comments[message.id]) && (
+          {comments[message.id] && (
             <div>
               <strong>Comments:</strong>
               {comments[message.id].map((comment, index) => (
