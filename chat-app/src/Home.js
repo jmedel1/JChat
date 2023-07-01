@@ -119,7 +119,6 @@ const Home = () => {
                 <div style={postActionsStyle} className="post-actions">
                   <button onClick={() => handleLike(post._id)}>Like ({post.likes})</button>
                   <button onClick={() => handleComment(post._id)}>Comment</button>
-                  <button>Share</button>
                 </div>
               </div>
             ))}
