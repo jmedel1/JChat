@@ -32,13 +32,13 @@ const ChatRoom = ({ messages }) => {
 
   return (
     <div>
-      <h2>Chat Room</h2>
+      <h2 style={{ color: '#ff6f00', fontFamily: 'Mexican-Font' }}>Chat Room</h2>
       {messages.map((message) => {
         const messageComments = comments[message.id] || [];
         return (
           <div key={message.id}>
-            <strong>{message.author}: </strong>
-            {message.content}
+            <strong style={{ color: '#d50000' }}>{message.author}: </strong>
+            <span style={{ color: '#000000' }}>{message.content}</span>
             <br />
             <button onClick={() => handleLike(message.id)}>Like</button>
             <button onClick={() => handleDislike(message.id)}>Dislike</button>
@@ -48,22 +48,23 @@ const ChatRoom = ({ messages }) => {
               placeholder="Leave a comment..."
               value={comment}
               onChange={(e) => setComment(e.target.value)}
+              style={{ color: '#000000' }}
             />
             <button onClick={() => handleComment(message.id)}>Comment</button>
             {messageComments.length > 0 && (
               <div>
-                <strong>Comments:</strong>
+                <strong style={{ color: '#4527a0' }}>Comments:</strong>
                 {messageComments.map((comment, index) => (
-                  <div key={index}>{comment}</div>
+                  <div key={index} style={{ color: '#311b92' }}>{comment}</div>
                 ))}
               </div>
             )}
             <div>
-              <strong>Likes: </strong>
+              <strong style={{ color: '#d50000' }}>Likes: </strong>
               {likes[message.id] || 0}
             </div>
             <div>
-              <strong>Dislikes: </strong>
+              <strong style={{ color: '#ff1744' }}>Dislikes: </strong>
               {dislikes[message.id] || 0}
             </div>
           </div>
