@@ -1,13 +1,19 @@
 import React from 'react';
 
 const Home = () => {
-  const headingStyle = {
-    color: 'blue',
-    fontSize: '24px',
-    // Add any other desired inline styles
+  const homepageStyle = {
+    backgroundColor: 'lightgray',
+    color: 'gold',
+    padding: '20px',
+    // Add more styles here as needed
   };
 
-  return <h2 style={headingStyle}>Home</h2>;
+  return (
+    <div style={homepageStyle}>
+      {/* Rest of the code */}
+    </div>
+  );
 };
 
 export default Home;
+
