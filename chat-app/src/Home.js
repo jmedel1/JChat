@@ -2,14 +2,16 @@ import React from 'react';
 
 const Home = () => {
   const homepageStyle = {
-    backgroundColor: 'lightgray',
-    color: 'gold',
+    backgroundColor: '#F44336', // Bright red
+    color: '#FFFFFF', // White
     padding: '20px',
+    fontFamily: 'Montserrat, sans-serif', // Mexican-inspired font
   };
 
   const headingStyle = {
     textAlign: 'center',
     marginBottom: '20px',
+    fontFamily: 'Pacifico, cursive', // Mexican-inspired font for heading
   };
 
   const createPostStyle = {
@@ -21,8 +23,8 @@ const Home = () => {
   };
 
   const postStyle = {
-    backgroundColor: 'gold',
-    color: 'lightgray',
+    backgroundColor: '#FFC107', // Bright yellow
+    color: '#212121', // Black
     padding: '10px',
     marginBottom: '10px',
   };
@@ -35,7 +37,7 @@ const Home = () => {
 
   const footerStyle = {
     textAlign: 'center',
-    color: 'gold',
+    color: '#FFFFFF', // White
   };
 
   return (

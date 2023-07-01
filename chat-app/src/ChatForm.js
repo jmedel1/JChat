@@ -3,9 +3,17 @@ import React, { useState } from 'react';
 const ChatForm = () => {
   const [author, setAuthor] = useState('');
   const [content, setContent] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    // Input validation
+    if (!author || !content) {
+      setErrorMessage('Please enter your name and message.');
+      return;
+    }
+
     // Make the POST request to json-server
     fetch('http://localhost:3000/messages', {
       method: 'POST',
@@ -18,15 +26,22 @@ const ChatForm = () => {
       .then((data) => {
         // Handle the response data
         console.log(data);
+
+        // Clear the input fields
+        setAuthor('');
+        setContent('');
+        setErrorMessage('');
       })
       .catch((error) => {
         console.error('Error:', error);
+        setErrorMessage('An error occurred. Please try again later.');
       });
   };
 
   return (
     <div>
       <h2>Chat Form</h2>
+      {errorMessage && <p>{errorMessage}</p>}
       <form onSubmit={handleSubmit}>
         <input
           type="text"
