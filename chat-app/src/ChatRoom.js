@@ -40,10 +40,12 @@ const ChatRoom = ({ messages }) => {
           <input
             type="text"
             placeholder="Leave a comment..."
+            value={comments[message.id] || ''}
             onChange={(e) => {
+              const comment = e.target.value;
               setComments((prevComments) => ({
                 ...prevComments,
-                [message.id]: [...(prevComments[message.id] || []), e.target.value]
+                [message.id]: comment
               }));
             }}
           />
@@ -52,7 +54,7 @@ const ChatRoom = ({ messages }) => {
           >
             Comment
           </button>
-          {comments[message.id] && (
+          {Array.isArray(comments[message.id]) && (
             <div>
               <strong>Comments:</strong>
               {comments[message.id].map((comment, index) => (
