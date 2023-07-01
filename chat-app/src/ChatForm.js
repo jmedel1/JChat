@@ -22,25 +22,25 @@ const ChatForm = ({ onNewMessage }) => {
   };
 
   return (
-    <div style={{ backgroundColor: '#F94144', padding: '20px', borderRadius: '8px' }}>
-      <h2 style={{ color: '#F9C74F', fontFamily: 'MexicanFont', fontSize: '24px' }}>Chat Form</h2>
+    <div style={{ backgroundColor: '#F08080', padding: '20px', borderRadius: '8px' }}>
+      <h2 style={{ color: '#8B0000', fontFamily: 'MexicanFont', fontSize: '24px' }}>Chat Form</h2>
       <form onSubmit={handleSubmit}>
         <input
           type="text"
           placeholder="Your Name"
           value={author}
           onChange={(e) => setAuthor(e.target.value)}
-          style={{ backgroundColor: '#F3722C', color: '#FFF', padding: '10px', borderRadius: '4px', marginBottom: '10px', border: 'none' }}
+          style={{ backgroundColor: '#FFA07A', color: '#FFF', padding: '10px', borderRadius: '4px', marginBottom: '10px', border: 'none' }}
         />
         <br />
         <textarea
           placeholder="Your Message"
           value={content}
           onChange={(e) => setContent(e.target.value)}
-          style={{ backgroundColor: '#F3722C', color: '#FFF', padding: '10px', borderRadius: '4px', marginBottom: '10px', border: 'none' }}
+          style={{ backgroundColor: '#FFA07A', color: '#FFF', padding: '10px', borderRadius: '4px', marginBottom: '10px', border: 'none' }}
         ></textarea>
         <br />
-        <button type="submit" style={{ backgroundColor: '#F9C74F', color: '#FFF', padding: '10px 20px', borderRadius: '4px', border: 'none' }}>Send</button>
+        <button type="submit" style={{ backgroundColor: '#8B0000', color: '#FFF', padding: '10px 20px', borderRadius: '4px', border: 'none' }}>Send</button>
       </form>
     </div>
   );
