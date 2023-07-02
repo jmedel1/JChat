@@ -4,13 +4,15 @@ const ChatRoom = ({ messages }) => {
   const [comments, setComments] = useState({});
   const [likes, setLikes] = useState({});
   const [dislikes, setDislikes] = useState({});
+  const [comment, setComment] = useState('');
 
-  const handleComment = (messageId, comment) => {
+  const handleComment = (messageId) => {
     if (comment.trim()) {
       setComments((prevComments) => ({
         ...prevComments,
         [messageId]: [...(prevComments[messageId] || []), comment]
       }));
+      setComment(''); // Clear the comment state
     }
   };
 
@@ -33,9 +35,6 @@ const ChatRoom = ({ messages }) => {
       <h2 style={{ color: '#ff6f00', fontFamily: 'Pacifico, cursive' }}>Chat Room</h2>
       {messages.map((message) => {
         const messageComments = comments[message.id] || [];
-        const messageLikes = likes[message.id] || 0;
-        const messageDislikes = dislikes[message.id] || 0;
-
         return (
           <div key={message.id}>
             <strong style={{ color: '#d50000' }}>{message.author}: </strong>
@@ -47,10 +46,11 @@ const ChatRoom = ({ messages }) => {
             <input
               type="text"
               placeholder="Leave a comment..."
-              onChange={(e) => handleComment(message.id, e.target.value)}
+              value={comment}
+              onChange={(e) => setComment(e.target.value)}
               style={{ color: '#000000' }}
             />
-            <button onClick={() => handleComment(message.id, '')}>Comment</button>
+            <button onClick={() => handleComment(message.id)}>Comment</button>
             {messageComments.length > 0 && (
               <div>
                 <strong style={{ color: '#4527a0' }}>Comments:</strong>
@@ -61,11 +61,11 @@ const ChatRoom = ({ messages }) => {
             )}
             <div>
               <strong style={{ color: '#d50000' }}>Likes: </strong>
-              {messageLikes}
+              {likes[message.id] || 0}
             </div>
             <div>
               <strong style={{ color: '#ff1744' }}>Dislikes: </strong>
-              {messageDislikes}
+              {dislikes[message.id] || 0}
             </div>
           </div>
         );
